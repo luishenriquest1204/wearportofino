@@ -1,0 +1,315 @@
+@import "tailwindcss";
+
+/* ═════════════════════════ PORTOFINO — design system ═════════════════════════
+   Fonts (real files, licensed via Fontsource / Google Fonts, SIL OFL):
+   Ponomar ............ editorial headings (as in the reference artwork)
+   Poppins 200/300 + italics, 400 ... navigation, labels, product information
+   Luxurious Script ... signatures (footer headings, small campaign details)
+   Bodoni Moda ........ high-contrast serif for large display moments
+   ═══════════════════════════════════════════════════════════════════════════ */
+@theme {
+  --color-navy: #0f1e3f;
+  --color-offwhite: #f7f5f0;
+  --color-beige: #d9ccba;
+  --color-sand: #c8b79f;
+  --color-brown: #796653;
+  --color-ink: #191919;
+  --color-studio: #e8e5df; /* product cell, sampled from the references */
+  --color-hair: #d6d3cd; /* hairlines */
+  --color-mute: #8c8c8c;
+  --color-faint: #a9a9a9; /* compare-at price */
+
+  --font-sans: "Poppins", "Helvetica Neue", Arial, sans-serif;
+  --font-ponomar: "Ponomar", "Cormorant Garamond", Georgia, serif;
+  --font-script: "Luxurious Script", cursive;
+  --font-bodoni: "Bodoni Moda Variable", Didot, Georgia, serif;
+
+  --ease-silk: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    background: #fff;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  ::selection {
+    background: var(--color-navy);
+    color: #fff;
+  }
+  :focus-visible {
+    outline: 1px solid currentColor;
+    outline-offset: 3px;
+  }
+  button {
+    cursor: pointer;
+  }
+  img {
+    -webkit-user-drag: none;
+  }
+}
+
+/* ─────────── Type scale (desktop values scale down with clamp) ─────────── */
+@layer components {
+  .t-display {
+    font-family: var(--font-ponomar);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    line-height: 1.06;
+  }
+  .t-bodoni {
+    font-family: var(--font-bodoni);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 0.98;
+  }
+  .t-script {
+    font-family: var(--font-script);
+    font-weight: 400;
+    line-height: 1;
+  }
+  .t-nav {
+    font-weight: 300;
+    font-size: 14px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+  .t-caps {
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+  }
+  .t-caps-thin {
+    font-weight: 200;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+  .t-label {
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+  }
+  .t-micro {
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .t-italic-thin {
+    font-weight: 200;
+    font-style: italic;
+  }
+
+  .gutter {
+    padding-left: clamp(16px, 2.2vw, 34px);
+    padding-right: clamp(16px, 2.2vw, 34px);
+  }
+
+  /* underline that draws away on hover */
+  .u-line {
+    background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat;
+    padding-bottom: 3px;
+    transition: background-size 0.6s var(--ease-expo);
+  }
+  .u-line:hover {
+    background-position: 100% 100%;
+    background-size: 0% 1px;
+  }
+  .u-reveal {
+    background: linear-gradient(currentColor, currentColor) 0 100% / 0% 1px no-repeat;
+    padding-bottom: 3px;
+    transition: background-size 0.6s var(--ease-expo);
+  }
+  .u-reveal:hover,
+  .u-reveal[aria-current="page"] {
+    background-size: 100% 1px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50px;
+    padding: 0 28px;
+    font-weight: 400;
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    transition: background-color 0.5s var(--ease-expo), color 0.5s var(--ease-expo), opacity 0.3s;
+  }
+  .btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+  .btn-dark {
+    background: var(--color-navy);
+    color: #fff;
+  }
+  .btn-dark:not(:disabled):hover {
+    background: var(--color-ink);
+  }
+  .btn-line {
+    border: 1px solid var(--color-ink);
+  }
+  .btn-line:not(:disabled):hover {
+    background: var(--color-ink);
+    color: #fff;
+  }
+
+  .field {
+    width: 100%;
+    border: 0;
+    border-bottom: 1px solid var(--color-hair);
+    background: transparent;
+    padding: 12px 0 9px;
+    font-size: 16px; /* 16px+ keeps iOS from zooming into the field */
+    border-radius: 0;
+    transition: border-color 0.4s;
+  }
+  .field:focus {
+    outline: none;
+    border-bottom-color: var(--color-ink);
+  }
+  .field-label {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-mute);
+  }
+
+  /* Brand marks — official artwork as masks, so they take any colour */
+  .mark {
+    display: block;
+    background: currentColor;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+  }
+  .mark-monogram {
+    -webkit-mask-image: url("./brand/monogram.svg");
+    mask-image: url("./brand/monogram.svg");
+    aspect-ratio: 1080 / 920;
+  }
+  .mark-dept {
+    -webkit-mask-image: url("./brand/portofino-dept.svg");
+    mask-image: url("./brand/portofino-dept.svg");
+    aspect-ratio: 2700 / 660;
+  }
+  .mark-lockup {
+    -webkit-mask-image: url("./brand/portofino-lockup.svg");
+    mask-image: url("./brand/portofino-lockup.svg");
+    aspect-ratio: 6000 / 963;
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .demo-tag {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+  }
+}
+
+/* ─────────── Motion hooks (only when JS + motion are available) ─────────── */
+html.motion [data-r="img"] {
+  clip-path: inset(100% 0 0 0);
+}
+html.motion [data-r="up"],
+html.motion [data-r="fade"] {
+  opacity: 0;
+}
+html.motion [data-r="lines"],
+html.motion [data-r="words"] {
+  visibility: hidden;
+}
+html.motion [data-hero="mask"] {
+  clip-path: inset(12% 9% 12% 9%);
+}
+html.motion [data-hero="img"] {
+  transform: scale(1.25);
+}
+html.motion [data-hero="mark"] {
+  transform: translateY(60%);
+  opacity: 0;
+}
+html.motion [data-hero="fade"] {
+  opacity: 0;
+}
+.split-line {
+  display: block;
+  overflow: hidden;
+}
+
+/* Intro overlay: hidden before paint on repeat visits; CSS fail-safe without JS. */
+html.intro-seen .pf-intro {
+  display: none;
+}
+.pf-intro {
+  animation: intro-failsafe 0.01s linear 5s forwards;
+}
+@keyframes intro-failsafe {
+  to {
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Page transition — each route settles in (pure CSS). */
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.page-in {
+  animation: page-in 0.9s var(--ease-expo) backwards; /* no fill after the end: a lingering transform would trap position:fixed overlays */
+}
+
+/* Space for the fixed header on pages that do not open on a full-bleed photograph. */
+.pt-header {
+  padding-top: 68px;
+}
+@media (min-width: 768px) {
+  .pt-header {
+    padding-top: 96px;
+  }
+}
+@media (min-width: 1024px) {
+  .pt-header {
+    padding-top: 122px;
+  }
+}

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="./brand/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#FFFFFF" />
+    <meta name="description" content="PORTOFINO — a maison of 100% linen. Quiet luxury from the Mediterranean." />
+    <title>PORTOFINO — A new destination awaits</title>
+    <script>
+      // Before first paint: enable reveal styles only when motion is allowed; skip the intro on repeat visits.
+      (function () {
+        var d = document.documentElement;
+        try {
+          var r = matchMedia("(prefers-reduced-motion: reduce)").matches, seen = false;
+          try { seen = sessionStorage.getItem("pf-intro") === "1"; sessionStorage.setItem("pf-intro", "1"); } catch (e) { seen = true; }
+          if (seen || r) d.classList.add("intro-seen");
+          if (!r) { d.classList.add("motion"); setTimeout(function () { if (!window.__pfMotion) d.classList.remove("motion"); }, 4000); }
+        } catch (e) { d.classList.add("intro-seen"); }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
