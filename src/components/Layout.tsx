@@ -9,6 +9,7 @@ import { buildReveals, loadMotion, reduced } from "../lib/motion";
 import type Lenis from "lenis";
 import { useLang } from "../i18n";
 import { useUi } from "../store/shop";
+import { STORE } from "../config/store";
 
 /** Storefront shell: header, page transition, overlays, footer, smooth scroll and reveals per route. */
 export function Layout() {
@@ -64,7 +65,7 @@ export function Layout() {
       <Header key={`h-${lang}`} />
       <MobileMenu key={`m-${lang}`} />
       <SearchOverlay key={`s-${lang}`} />
-      <BagDrawer key={`b-${lang}`} />
+      {STORE.COMMERCE_ENABLED ? <BagDrawer key={`b-${lang}`} /> : null}
       <div ref={main}>
         <main id="main" key={`${pathname}-${lang}`} className="page-in min-h-[60vh]">
           <Outlet />

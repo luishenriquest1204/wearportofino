@@ -1,3 +1,4 @@
+import { useMeta } from "../lib/meta";
 import { Link, useParams, useSearchParams } from "react-router";
 import { tr, useLang } from "../i18n";
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -6,6 +7,8 @@ import { useBag, useUi } from "../store/shop";
 import { CARE_TEXT, CATEGORIES, formatBRL, SIZE_CHART, SIZES, SIZE_INTL, type Size } from "../data/catalog";
 import { Price, ProductCard, Swatches } from "../components/ProductCard";
 import { useDialog } from "../components/useDialog";
+import { STORE } from "../config/store";
+import { PrelaunchBuyBox } from "../components/Prelaunch";
 import NotFound from "./NotFound";
 
 export default function ProductPage() {
@@ -50,6 +53,7 @@ export default function ProductPage() {
     return [{ src: color.image, alt: tr("{p} in {c}", { p: product.name, c: color.name }), kind: "studio" as const }, ...(colorIdx === 0 ? rest : [])];
   }, [product, color, colorIdx]);
 
+  useMeta(product?.name, product ? tr(product.description) : undefined);
   if (!product || !color) return <NotFound />;
   const cat = CATEGORIES.find((c) => c.slug === product.category)!;
   const stockFor = (s: Size) => product.stock[color.name]?.[s] ?? 0;
@@ -156,6 +160,7 @@ export default function ProductPage() {
               </p>
             </div>
 
+            {STORE.COMMERCE_ENABLED ? (<>
             <div ref={buyRef} className="mt-4 flex gap-3">
               <div className="flex h-[50px] items-center border border-hair" aria-label={tr("Quantity")} role="group">
                 <button type="button" className="h-full w-11 text-lg disabled:opacity-30" onClick={() => setQty((q) => Math.max(1, q - 1))} disabled={qty <= 1} aria-label={tr("Decrease quantity")}>−</button>
@@ -168,6 +173,7 @@ export default function ProductPage() {
               </button>
             </div>
             {err ? <p role="alert" className="mt-3 text-[12px] text-brown">{tr(err)}</p> : null}
+            </>) : <PrelaunchBuyBox />}
 
             <div className="mt-10 border-t border-hair">
               <Acc title={tr("Details")} open>
@@ -180,7 +186,7 @@ export default function ProductPage() {
                 <p>{tr(product.fit)}</p>
               </Acc>
               <Acc title={tr("Shipping & returns")}>
-                <p>{tr("Complimentary shipping across Brazil on orders over R$1.500. Returns accepted within 30 days, unworn and with labels.")} <span className="demo-tag ml-1">{tr("Demo")}</span></p>
+                <p>{tr("Complimentary shipping across Brazil on orders over R$1.500. Returns accepted within 30 days, unworn and with labels.")}</p>
               </Acc>
             </div>
             <p className="t-micro mt-6 text-mute">{tr("Ref.")} {product.sku}</p>
@@ -189,6 +195,7 @@ export default function ProductPage() {
       </div>
 
       {/* Mobile: the purchase stays one tap away while the buy box is above the fold line */}
+      {STORE.COMMERCE_ENABLED ? (
       <div className={`fixed inset-x-0 bottom-0 z-30 border-t border-hair bg-white/95 px-4 pb-[max(12px,env(safe-area-inset-bottom))] pt-3 backdrop-blur-sm transition-transform duration-500 ease-[var(--ease-expo)] lg:hidden ${buyHidden ? "translate-y-0" : "translate-y-full"}`} aria-hidden={!buyHidden}>
         <div className="flex items-center gap-3">
           <div className="min-w-0 flex-1">
@@ -198,6 +205,7 @@ export default function ProductPage() {
           <button type="button" tabIndex={buyHidden ? 0 : -1} onClick={submit} className="btn btn-dark min-h-[46px] px-5">{size ? tr("Add to bag") : tr("Select size")}</button>
         </div>
       </div>
+      ) : null}
 
       {related.length ? (
         <section className="border-t border-hair px-[clamp(16px,1.35vw,27px)] py-[clamp(64px,7vw,140px)]" aria-labelledby="also">

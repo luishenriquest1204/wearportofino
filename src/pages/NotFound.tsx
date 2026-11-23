@@ -1,8 +1,10 @@
+import { useMeta } from "../lib/meta";
 import { Link } from "react-router";
 import { tr } from "../i18n";
 import { Monogram } from "../components/Marks";
 
 export default function NotFound() {
+  useMeta(tr("Lost at sea"));
   return (
     <div className="pt-header">
       <section className="grid min-h-[70vh] place-items-center px-4 py-24 text-center">

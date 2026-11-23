@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Search, ShoppingBag } from "lucide-react";
 import { Monogram } from "./Marks";
 import { LangSwitch } from "./LangSwitch";
+import { STORE } from "../config/store";
 import { useBag, useUi } from "../store/shop";
 
 const LEFT = [
@@ -75,6 +76,7 @@ export function Header() {
             <button type="button" className="t-nav u-reveal hidden md:inline" onClick={() => setSearch(true)}>{tr("Search")}</button>
             <button type="button" className="grid size-11 place-items-center md:hidden" aria-label={tr("Search")} onClick={() => setSearch(true)}><Search size={18} strokeWidth={1.2} /></button>
             <Link to="/account" className="t-nav u-reveal hidden md:inline">{tr("Account")}</Link>
+            {STORE.COMMERCE_ENABLED ? (
             <button type="button" className="t-nav -mr-2 flex min-h-11 items-center gap-1 px-2 md:mr-0 md:min-h-0 md:px-0" onClick={() => setBag(true)} aria-label={tr("Bag, {n} items", { n: count })}>
               <span className="hidden md:inline">{tr("Bag")}</span>
               <ShoppingBag className="md:hidden" size={18} strokeWidth={1.2} aria-hidden />
@@ -82,6 +84,9 @@ export function Header() {
                 <span ref={countRef} className="inline-block tabular-nums">({count})</span>
               </span>
             </button>
+            ) : (
+              <Link to="/shop" className="t-nav hidden items-center md:inline-flex" title={tr("Official launch soon")}>{tr("Coming soon")}</Link>
+            )}
           </div>
         </div>
       </header>

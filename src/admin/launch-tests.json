@@ -1,0 +1,374 @@
+{
+  "generatedAt": "2026-11-23T18:41:54.594Z",
+  "summary": "80 passed, 0 failed across 4 suites (navigation, commerce block, integrity, security).",
+  "suites": [
+    {
+      "name": "Navigation",
+      "passed": 33,
+      "failed": 0,
+      "cases": [
+        {
+          "name": "/ renders",
+          "ok": true
+        },
+        {
+          "name": "/shop renders",
+          "ok": true
+        },
+        {
+          "name": "/shop/shirts renders",
+          "ok": true
+        },
+        {
+          "name": "/shop/blouses renders",
+          "ok": true
+        },
+        {
+          "name": "/shop/trousers renders",
+          "ok": true
+        },
+        {
+          "name": "/shop/shorts renders",
+          "ok": true
+        },
+        {
+          "name": "/new-in renders",
+          "ok": true
+        },
+        {
+          "name": "/essentials renders",
+          "ok": true
+        },
+        {
+          "name": "/product/portofino-shirt renders",
+          "ok": true
+        },
+        {
+          "name": "/product/liguria-blouse renders",
+          "ok": true
+        },
+        {
+          "name": "/product/santa-margherita-shorts renders",
+          "ok": true
+        },
+        {
+          "name": "/product/riviera-trouser renders",
+          "ok": true
+        },
+        {
+          "name": "/about renders",
+          "ok": true
+        },
+        {
+          "name": "/search renders",
+          "ok": true
+        },
+        {
+          "name": "/search?q=linen renders",
+          "ok": true
+        },
+        {
+          "name": "/newsletter renders",
+          "ok": true
+        },
+        {
+          "name": "/info/shipping renders",
+          "ok": true
+        },
+        {
+          "name": "/info/returns renders",
+          "ok": true
+        },
+        {
+          "name": "/info/faq renders",
+          "ok": true
+        },
+        {
+          "name": "/info/contact renders",
+          "ok": true
+        },
+        {
+          "name": "/info/philosophy renders",
+          "ok": true
+        },
+        {
+          "name": "/info/size-guide renders",
+          "ok": true
+        },
+        {
+          "name": "/info/privacy renders",
+          "ok": true
+        },
+        {
+          "name": "/info/terms renders",
+          "ok": true
+        },
+        {
+          "name": "/info/payments renders",
+          "ok": true
+        },
+        {
+          "name": "All images on public pages load",
+          "ok": true
+        },
+        {
+          "name": "Internal links (24) resolve",
+          "ok": true
+        },
+        {
+          "name": "No third-party requests (fonts and images self-hosted)",
+          "ok": true
+        },
+        {
+          "name": "Responsive: iPhone 13 has no horizontal scroll",
+          "ok": true
+        },
+        {
+          "name": "Responsive: iPhone SE has no horizontal scroll",
+          "ok": true
+        },
+        {
+          "name": "Responsive: Pixel 7 has no horizontal scroll",
+          "ok": true
+        },
+        {
+          "name": "Responsive: iPad Mini has no horizontal scroll",
+          "ok": true
+        },
+        {
+          "name": "Responsive: iPad Pro 11 landscape has no horizontal scroll",
+          "ok": true
+        }
+      ]
+    },
+    {
+      "name": "Commerce block",
+      "passed": 19,
+      "failed": 0,
+      "cases": [
+        {
+          "name": "Portofino Shirt: no add-to-bag or quantity control, launch notice shown",
+          "ok": true
+        },
+        {
+          "name": "Liguria Blouse: no add-to-bag or quantity control, launch notice shown",
+          "ok": true
+        },
+        {
+          "name": "Santa Margherita Shorts: no add-to-bag or quantity control, launch notice shown",
+          "ok": true
+        },
+        {
+          "name": "Riviera Trouser: no add-to-bag or quantity control, launch notice shown",
+          "ok": true
+        },
+        {
+          "name": "Header has no bag button (cannot open a bag)",
+          "ok": true
+        },
+        {
+          "name": "Bag drawer is not mounted",
+          "ok": true
+        },
+        {
+          "name": "Direct URL /bag is blocked",
+          "ok": true,
+          "detail": "0 form fields"
+        },
+        {
+          "name": "Direct URL /checkout is blocked",
+          "ok": true,
+          "detail": "0 form fields"
+        },
+        {
+          "name": "Direct URL /checkout/confirmation is blocked",
+          "ok": true,
+          "detail": "0 form fields"
+        },
+        {
+          "name": "Direct URL /account is blocked",
+          "ok": true,
+          "detail": "0 form fields"
+        },
+        {
+          "name": "Forged storage/URL flags do not unlock /bag",
+          "ok": true
+        },
+        {
+          "name": "Forged storage/URL flags do not unlock /checkout",
+          "ok": true
+        },
+        {
+          "name": "Forged storage/URL flags do not unlock /account",
+          "ok": true
+        },
+        {
+          "name": "Injected bag lines are not shown anywhere",
+          "ok": true
+        },
+        {
+          "name": "POST /api/orders cannot create an order or charge",
+          "ok": true,
+          "detail": "HTTP 404 no body type"
+        },
+        {
+          "name": "POST /api/checkout cannot create an order or charge",
+          "ok": true,
+          "detail": "HTTP 404 no body type"
+        },
+        {
+          "name": "POST /api/payments cannot create an order or charge",
+          "ok": true,
+          "detail": "HTTP 404 no body type"
+        },
+        {
+          "name": "POST /api/payments/webhook cannot create an order or charge",
+          "ok": true,
+          "detail": "HTTP 404 no body type"
+        },
+        {
+          "name": "No request to any payment provider",
+          "ok": true
+        }
+      ]
+    },
+    {
+      "name": "Integrity",
+      "passed": 20,
+      "failed": 0,
+      "cases": [
+        {
+          "name": "Catalogue source has 4 products",
+          "ok": true,
+          "detail": "Portofino Shirt, Liguria Blouse, Santa Margherita Shorts, Riviera Trouser"
+        },
+        {
+          "name": "Shop lists every product",
+          "ok": true,
+          "detail": "4 cards"
+        },
+        {
+          "name": "Portofino Shirt: price R$342 on the shop card",
+          "ok": true,
+          "detail": "NEW PORTOFINO SHIRT Was R$380 Now R$342"
+        },
+        {
+          "name": "Portofino Shirt: product page shows name, price, description and sizes",
+          "ok": true
+        },
+        {
+          "name": "Liguria Blouse: price R$342 on the shop card",
+          "ok": true,
+          "detail": "NEW LIGURIA BLOUSE Was R$380 Now R$342"
+        },
+        {
+          "name": "Liguria Blouse: product page shows name, price, description and sizes",
+          "ok": true
+        },
+        {
+          "name": "Santa Margherita Shorts: price R$342 on the shop card",
+          "ok": true,
+          "detail": "NEW SANTA MARGHERITA SHORTS Was R$380 Now R$342"
+        },
+        {
+          "name": "Santa Margherita Shorts: product page shows name, price, description and sizes",
+          "ok": true
+        },
+        {
+          "name": "Riviera Trouser: price R$342 on the shop card",
+          "ok": true,
+          "detail": "NEW RIVIERA TROUSER Was R$380 Now R$342"
+        },
+        {
+          "name": "Riviera Trouser: product page shows name, price, description and sizes",
+          "ok": true
+        },
+        {
+          "name": "Category shirts shows 1 piece(s)",
+          "ok": true,
+          "detail": "1 shown"
+        },
+        {
+          "name": "Category blouses shows 1 piece(s)",
+          "ok": true,
+          "detail": "1 shown"
+        },
+        {
+          "name": "Category trousers shows 1 piece(s)",
+          "ok": true,
+          "detail": "1 shown"
+        },
+        {
+          "name": "Category shorts shows 1 piece(s)",
+          "ok": true,
+          "detail": "1 shown"
+        },
+        {
+          "name": "Portuguese version shows the same prices",
+          "ok": true
+        },
+        {
+          "name": "Portuguese launch notice shown on product page",
+          "ok": true
+        },
+        {
+          "name": "Admin (private build): dashboard loads",
+          "ok": true
+        },
+        {
+          "name": "Admin: products table lists the catalogue",
+          "ok": true
+        },
+        {
+          "name": "Admin: launch panel reports pre-launch state",
+          "ok": true
+        },
+        {
+          "name": "Admin: activation is locked while critical items are pending",
+          "ok": true
+        }
+      ]
+    },
+    {
+      "name": "Security",
+      "passed": 8,
+      "failed": 0,
+      "cases": [
+        {
+          "name": "Public build contains no admin code",
+          "ok": true
+        },
+        {
+          "name": "Public build contains no fictional customer data",
+          "ok": true
+        },
+        {
+          "name": "No keys, tokens or private keys in the public build",
+          "ok": true
+        },
+        {
+          "name": ".env holds only public VITE_ settings",
+          "ok": true,
+          "detail": "VITE_STORE_MODE=prelaunch | VITE_INCLUDE_ADMIN=false | VITE_ROUTER=hash | VITE_SITE_URL= | VITE_INSTAGRAM_URL= | VITE_CONTACT_EMAIL= | VITE_NEWSLETTER_ENDPOINT="
+        },
+        {
+          "name": "Store mode is compiled in as pre-launch",
+          "ok": true
+        },
+        {
+          "name": "/admin on the public site is a 404",
+          "ok": true
+        },
+        {
+          "name": "No cookies set by the site",
+          "ok": true
+        },
+        {
+          "name": "Browser storage holds no personal data",
+          "ok": true,
+          "detail": "{\"ls\":[],\"ss\":[\"pf-intro\"]}"
+        }
+      ]
+    }
+  ]
+}

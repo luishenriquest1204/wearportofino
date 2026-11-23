@@ -1,4 +1,4 @@
-import { HashRouter, Route, Routes } from "react-router";
+import { BrowserRouter, HashRouter, Route, Routes } from "react-router";
 import { lazy, Suspense } from "react";
 import { Layout } from "./components/Layout";
 import Home from "./pages/Home";
@@ -12,12 +12,17 @@ import Checkout, { Confirmation } from "./pages/Checkout";
 import Info from "./pages/Info";
 import NewsletterPage from "./pages/NewsletterPage";
 import NotFound from "./pages/NotFound";
+import { CommerceRoute } from "./components/Prelaunch";
+import { SITE } from "./config/store";
 
-const Admin = lazy(() => import("./admin/Admin"));
+// The Creator is compiled only into the private admin build (VITE_INCLUDE_ADMIN=true).
+// In the public build this branch is dead code and the admin chunk is not emitted at all.
+const Admin = import.meta.env.VITE_INCLUDE_ADMIN === "true" ? lazy(() => import("./admin/Admin")) : null;
+const Router = SITE.router === "browser" ? BrowserRouter : HashRouter;
 
 export default function App() {
   return (
-    <HashRouter>
+    <Router>
       <Routes>
         <Route element={<Layout />}>
           <Route index element={<Home />} />
@@ -28,14 +33,15 @@ export default function App() {
           <Route path="product/:slug" element={<ProductPage />} />
           <Route path="about" element={<About />} />
           <Route path="search" element={<Search />} />
-          <Route path="account" element={<Account />} />
-          <Route path="bag" element={<Bag />} />
-          <Route path="checkout" element={<Checkout />} />
-          <Route path="checkout/confirmation" element={<Confirmation />} />
+          <Route path="account" element={<CommerceRoute kind="account"><Account /></CommerceRoute>} />
+          <Route path="bag" element={<CommerceRoute kind="bag"><Bag /></CommerceRoute>} />
+          <Route path="checkout" element={<CommerceRoute kind="checkout"><Checkout /></CommerceRoute>} />
+          <Route path="checkout/confirmation" element={<CommerceRoute kind="checkout"><Confirmation /></CommerceRoute>} />
           <Route path="info/:slug" element={<Info />} />
           <Route path="newsletter" element={<NewsletterPage />} />
           <Route path="*" element={<NotFound />} />
         </Route>
+        {Admin ? (
         <Route
           path="admin/*"
           element={
@@ -44,7 +50,8 @@ export default function App() {
             </Suspense>
           }
         />
+        ) : null}
       </Routes>
-    </HashRouter>
+    </Router>
   );
 }

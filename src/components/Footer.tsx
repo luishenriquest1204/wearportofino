@@ -2,9 +2,10 @@ import { Link } from "react-router";
 import { tr } from "../i18n";
 import { Dept, Lockup } from "./Marks";
 import { LangSwitch } from "./LangSwitch";
+import { SITE, STORE } from "../config/store";
 
 const COLS = [
-  { title: "Portofino", links: [["About Us", "/about"], ["Our Philosophy", "/info/philosophy"], ["Contact", "/info/contact"], ["Newsletter", "/newsletter"], ["Instagram", "https://instagram.com"]] },
+  { title: "Portofino", links: [["About Us", "/about"], ["Our Philosophy", "/info/philosophy"], ["Contact", "/info/contact"], ["Newsletter", "/newsletter"], ...(SITE.instagram ? [["Instagram", SITE.instagram] as const] : [])] },
   { title: "Customer Care", links: [["Shipping", "/info/shipping"], ["Returns", "/info/returns"], ["FAQ", "/info/faq"], ["Size Guide", "/info/size-guide"]] },
   { title: "Information", links: [["Privacy Policy", "/info/privacy"], ["Terms & Conditions", "/info/terms"], ["Payment Methods", "/info/payments"]] },
 ] as const;
@@ -45,7 +46,7 @@ export function Footer() {
       <div className="gutter flex flex-col gap-2 border-t border-hair py-4 text-[11px] uppercase tracking-[0.08em] text-mute md:flex-row md:justify-between">
         <span>© {new Date().getFullYear()} Portofino · {tr("Since MMXXVI")}</span>
         <LangSwitch className="-my-3 text-[11px]" />
-        <span>{tr("Demonstration website — no real transactions")}</span>
+        <span>{STORE.PRELAUNCH ? tr("Official launch soon") : null}</span>
       </div>
     </footer>
   );

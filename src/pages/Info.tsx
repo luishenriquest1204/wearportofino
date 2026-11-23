@@ -1,12 +1,14 @@
+import { useMeta } from "../lib/meta";
 import { Link, useParams } from "react-router";
 import { tr, useLang } from "../i18n";
+import { SITE, STORE } from "../config/store";
 import { CATEGORIES, SIZE_CHART, SIZES, SIZE_INTL } from "../data/catalog";
 import NotFound from "./NotFound";
 
 type Page = { title: string; kicker: string; body: React.ReactNode };
 const P = ({ children }: { children: React.ReactNode }) => <p className="mt-5 text-[14px] font-light leading-[1.85] text-ink/85">{children}</p>;
 const H = ({ children }: { children: React.ReactNode }) => <h2 className="t-nav mt-12 text-[13px]">{children}</h2>;
-const demo = () => <p className="mt-12 border-t border-hair pt-5 text-[12px] font-light text-mute">{tr("This is a demonstration website. Policies shown here are illustrative and not legally binding.")}</p>;
+const demo = () => (STORE.PRELAUNCH ? <p className="mt-12 border-t border-hair pt-5 text-[12px] font-light text-mute">{tr("Sales open with our official launch. These conditions apply to orders placed from that date.")}</p> : null);
 
 const FAQ = [
   ["How does linen fit?", "Our pieces are cut for a relaxed, unisex fit. Linen softens and relaxes slightly with wear; if you are between sizes, choose the smaller for a closer fit."],
@@ -20,7 +22,7 @@ const pages = (): Record<string, Page> => ({
   shipping: { title: "Shipping", kicker: "Customer care", body: (<><P>{tr("We ship across Brazil from our atelier. Every order is folded by hand, wrapped in tissue and sent in a recyclable box.")}</P><H>{tr("Methods")}</H><P>{tr("Standard — 5 to 8 working days — R$35, complimentary on orders over R$1.500.")}<br />{tr("Express — 1 to 3 working days — R$69.")}</P><H>{tr("Tracking")}</H><P>{tr("A tracking link is sent by email as soon as your order leaves the atelier.")}</P>{demo()}</>) },
   returns: { title: "Returns", kicker: "Customer care", body: (<><P>{tr("You have 30 days from delivery to return or exchange any piece, unworn, unwashed and with its labels attached.")}</P><H>{tr("Exchanges")}</H><P>{tr("Size exchanges are free of charge. We send the new size as soon as the original is on its way back.")}</P><H>{tr("Refunds")}</H><P>{tr("Refunds are issued to the original payment method within 10 working days of receiving the return.")}</P>{demo()}</>) },
   faq: { title: "FAQ", kicker: "Customer care", body: (<><div className="mt-6 border-t border-hair">{FAQ.map(([q, a]) => (<details key={q} className="group border-b border-hair"><summary className="flex cursor-pointer list-none items-center justify-between py-5 text-[13px] uppercase [&::-webkit-details-marker]:hidden">{tr(q)}<span className="text-lg font-extralight transition-transform group-open:rotate-45" aria-hidden>+</span></summary><p className="pb-6 text-[14px] font-light leading-[1.8] text-ink/85">{tr(a)}</p></details>))}</div>{demo()}</>) },
-  contact: { title: "Contact", kicker: "Portofino", body: (<><P>{tr("We are happy to help with sizing, orders or anything else.")}</P><H>{tr("Client service")}</H><P>{tr("Monday to Friday, 9am – 6pm (Brasília time).")}<br />{tr("hello@portofino.example")}<br />{tr("Instagram — @portofino")}</P><H>{tr("Atelier")}</H><P>{tr("Visits by appointment only.")}</P>{demo()}</>) },
+  contact: { title: "Contact", kicker: "Portofino", body: (<><P>{tr("We are happy to help with sizing, orders or anything else.")}</P><H>{tr("Client service")}</H><P>{tr("Monday to Friday, 9am – 6pm (Brasília time).")}{SITE.contactEmail ? <><br /><span className="select-all">{SITE.contactEmail}</span></> : null}{SITE.instagram ? <><br /><a href={SITE.instagram} target="_blank" rel="noopener noreferrer" className="u-line">Instagram</a></> : null}{!SITE.contactEmail && !SITE.instagram ? <><br />{tr("Our contact channels open with the official launch.")}</> : null}</P><H>{tr("Atelier")}</H><P>{tr("Visits by appointment only.")}</P>{demo()}</>) },
   philosophy: { title: "Our philosophy", kicker: "Portofino", body: (<><p className="t-script mt-6 text-[48px] text-brown">{tr("slow living")}</p><P>{tr("We believe in fewer, better things. One material — linen — chosen for how it breathes, how it ages and how it feels on a warm afternoon.")}</P><P>{tr("Our collections are small and considered: the shirt, the bata, the trouser, the bermuda. Each is refined season after season rather than replaced.")}</P><Link to="/about" className="btn btn-line mt-10">{tr("About us")}</Link></>) },
   "size-guide": {
     title: "Size guide",
@@ -42,15 +44,16 @@ const pages = (): Record<string, Page> => ({
       </>
     ),
   },
-  privacy: { title: "Privacy policy", kicker: "Information", body: (<><P>{tr("This demonstration website does not collect, transmit or store personal data on any server. Information you type (bag, account, newsletter, checkout) stays in this browser tab’s session storage and disappears when the tab is closed.")}</P><H>{tr("Cookies")}</H><P>{tr("No tracking or advertising cookies are used.")}</P>{demo()}</>) },
-  terms: { title: "Terms of use", kicker: "Information", body: (<><P>{tr("All prices are shown in Brazilian reais (BRL). Product photography is indicative; colours may vary slightly from screen to screen.")}</P><P>{tr("No purchase can be completed on this demonstration website.")}</P>{demo()}</>) },
-  payments: { title: "Payments", kicker: "Information", body: (<><P>{tr("A live PORTOFINO store would accept Pix and major credit cards, in up to 6 interest-free instalments.")}</P><P>{tr("This demonstration does not connect to any payment provider and never asks for card details.")}</P>{demo()}</>) },
+  privacy: { title: "Privacy policy", kicker: "Information", body: (<><P>{tr("During the pre-launch period this website does not collect or store personal data on any server. Your language preference is kept only in your own browser.")}</P><H>{tr("Cookies")}</H><P>{tr("No tracking or advertising cookies are used.")}</P>{demo()}</>) },
+  terms: { title: "Terms of use", kicker: "Information", body: (<><P>{tr("All prices are shown in Brazilian reais (BRL). Product photography is indicative; colours may vary slightly from screen to screen.")}</P><P>{tr("Purchases open with our official launch.")}</P>{demo()}</>) },
+  payments: { title: "Payments", kicker: "Information", body: (<><P>{tr("PORTOFINO will accept Pix and major credit cards.")}</P><P>{tr("Card details are entered only on the payment provider’s secure page and are never stored by PORTOFINO.")}</P>{demo()}</>) },
 });
 
 export default function Info() {
   const { slug = "" } = useParams();
   const PAGES = pages();
   const page = PAGES[slug];
+  useMeta(page ? tr(page.title) : undefined);
   if (!page) return <NotFound />;
   const siblings = Object.entries(PAGES).filter(([, p]) => p.kicker === page.kicker);
   return (

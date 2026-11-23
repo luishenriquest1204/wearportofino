@@ -5,7 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:admin": "vite --mode admin",
     "build": "tsc -b && vite build",
+    "build:admin": "tsc -b && vite build --mode admin --outDir dist-admin",
+    "test:prelaunch": "node tests/prelaunch.test.cjs",
     "lint": "oxlint",
     "preview": "vite preview"
   },

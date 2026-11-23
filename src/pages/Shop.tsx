@@ -1,3 +1,4 @@
+import { useMeta } from "../lib/meta";
 import { Link, useParams, useSearchParams } from "react-router";
 import { plural, tr, useLang } from "../i18n";
 import { useMemo, useState } from "react";
@@ -55,6 +56,7 @@ export default function Shop({ mode }: { mode: Mode }) {
     return sorted;
   }, [base, colors, sizes, sort]);
 
+  useMeta(cat ? tr(cat.name) : mode !== "category" ? tr(HEAD[mode].title) : undefined, cat ? tr(cat.caption) : mode !== "category" ? tr(HEAD[mode].intro) : undefined);
   if (mode === "category" && !cat) return <NotFound />;
   const pt = useLang.getState().lang === "pt";
   const base0 = cat ? { title: cat.name, sub: pt ? cat.name : cat.namePt, intro: tr(cat.caption) + "." } : HEAD[mode as Exclude<Mode, "category">];

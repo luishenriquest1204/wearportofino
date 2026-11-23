@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+# Add "Sitemap: https://<official-domain>/sitemap.xml" once the domain is set (see docs/OFFICIAL-LAUNCH-PROTOCOL.md).

@@ -5,6 +5,7 @@ import { useBag } from "../store/shop";
 import { FREE_SHIPPING, SHIPPING, useBagRows, type ShipKey } from "../store/useBagRows";
 import { formatBRL, formatBRLFull, SIZE_INTL } from "../data/catalog";
 import { Monogram } from "../components/Marks";
+import { assertCommerce } from "../config/store";
 
 type Form = { email: string; name: string; phone: string; cep: string; street: string; number: string; extra: string; district: string; city: string; state: string };
 const EMPTY: Form = { email: "", name: "", phone: "", cep: "", street: "", number: "", extra: "", district: "", city: "", state: "" };
@@ -57,6 +58,7 @@ export default function Checkout() {
     return !first;
   };
   const place = () => {
+    assertCommerce("place order"); // refuses in pre-launch even if this screen were reached
     const order: Order = { number: `PF-${String(Date.now()).slice(-6)}`, email: f.email, name: f.name.split(" ")[0], total, ship, pay, items: rows.reduce((a, r) => a + r.l.qty, 0) };
     clear();
     nav("/checkout/confirmation", { state: order, replace: true });

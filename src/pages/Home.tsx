@@ -1,3 +1,4 @@
+import { useMeta } from "../lib/meta";
 import { Link } from "react-router";
 import { plural, tr, useLang } from "../i18n";
 import { useEffect, useRef, useState } from "react";
@@ -23,6 +24,7 @@ export function useOverlayHeader() {
 
 export default function Home() {
   useOverlayHeader();
+  useMeta();
   const content = useContent((s) => s.content);
   const products = useCatalog((s) => s.products);
   const byId = (ids: string[]) => ids.map((id) => products.find((p) => p.id === id && p.published)).filter(Boolean) as Product[];

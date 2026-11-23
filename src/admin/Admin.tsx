@@ -1,6 +1,6 @@
 import { Link, NavLink, Route, Routes, useLocation } from "react-router";
 import { useEffect, useState } from "react";
-import { BarChart3, Boxes, Check, ExternalLink, LayoutDashboard, LayoutTemplate, Menu, Package, ShoppingBag, Users, Wallet, X } from "lucide-react";
+import { BarChart3, Boxes, Check, Rocket, ExternalLink, LayoutDashboard, LayoutTemplate, Menu, Package, ShoppingBag, Users, Wallet, X } from "lucide-react";
 import { Monogram } from "../components/Marks";
 import { useAdmin } from "./store";
 import Dashboard from "./Dashboard";
@@ -11,6 +11,7 @@ import Customers from "./Customers";
 import Financial from "./Financial";
 import ContentManager from "./Content";
 import Analytics from "./Analytics";
+import Launch from "./Launch";
 
 const NAV = [
   { to: "/admin", label: "Dashboard", icon: LayoutDashboard, end: true },
@@ -21,6 +22,7 @@ const NAV = [
   { to: "/admin/financial", label: "Financial", icon: Wallet },
   { to: "/admin/content", label: "Content", icon: LayoutTemplate },
   { to: "/admin/analytics", label: "Analytics", icon: BarChart3 },
+  { to: "/admin/launch", label: "Launch", icon: Rocket },
 ];
 
 export default function Admin() {
@@ -90,6 +92,7 @@ export default function Admin() {
             <Route path="financial" element={<Financial />} />
             <Route path="content" element={<ContentManager />} />
             <Route path="analytics" element={<Analytics />} />
+            <Route path="launch" element={<Launch />} />
             <Route path="*" element={<div className="py-24 text-center"><p className="text-[18px]">Page not found</p><Link to="/admin" className="mt-3 inline-block underline">Back to dashboard</Link></div>} />
           </Routes>
         </main>

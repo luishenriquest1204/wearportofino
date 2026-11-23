@@ -1,3 +1,4 @@
+import { useMeta } from "../lib/meta";
 import { Link, useSearchParams } from "react-router";
 import { tr } from "../i18n";
 import { useMemo, useState } from "react";
@@ -21,6 +22,7 @@ export default function Search() {
   const q = params.get("q") ?? "";
   const [value, setValue] = useState(q);
   const products = useCatalog((s) => s.products);
+  useMeta(tr("Search"));
   const results = useMemo(() => matchProducts(products, q), [products, q]);
   return (
     <div className="pt-header">

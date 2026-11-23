@@ -1,3 +1,4 @@
+import { useMeta } from "../lib/meta";
 import { Link } from "react-router";
 import { tr } from "../i18n";
 import { useOverlayHeader } from "./Home";
@@ -12,6 +13,7 @@ const VALUES = [
 
 export default function About() {
   useOverlayHeader();
+  useMeta(tr("About Us"), tr("Portofino was born from a feeling more than a place: the slow hours of a summer by the sea, a white shirt drying in the sun, the freedom of living well."));
   return (
     <>
       <section className="relative h-[100svh] min-h-[560px] overflow-hidden bg-ink text-white" aria-labelledby="about-t">
