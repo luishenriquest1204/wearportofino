@@ -32,7 +32,7 @@ export const useCatalog = create<CatalogState>()(
         set((s) => ({ products: s.products.map((p) => (p.id === id ? { ...p, stock: { ...p.stock, [color]: { ...p.stock[color], [size]: Math.max(0, Math.round(qty)) } } } : p)) })),
       reset: () => set({ products: PRODUCTS }),
     }),
-    { name: "pf-catalog", storage: sessionJSON, version: 4, migrate: () => ({ products: PRODUCTS }) as CatalogState },
+    { name: "pf-catalog", storage: sessionJSON, version: 5, migrate: () => ({ products: PRODUCTS }) as CatalogState },
   ),
 );
 

@@ -76,9 +76,8 @@ export const PRODUCTS: Product[] = [
     published: true,
     colors: [
       { name: "Bianco", hex: "#FFFFFF", image: "img/product-blouse.webp" },
-      { name: "Celeste", hex: "#B9C7D9", image: null },
     ],
-    stock: { Bianco: { PP: 3, P: 6, M: 8, G: 5, GG: 2 }, Celeste: { PP: 2, P: 4, M: 0, G: 3, GG: 1 } },
+    stock: { Bianco: { PP: 3, P: 6, M: 8, G: 5, GG: 2 } },
     cost: 11200,
     sku: "PF-BL-01",
     description: "A linen bata with a band collar and a short three-button placket, finished with a curved hem that falls just below the hip.",

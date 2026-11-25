@@ -30,7 +30,6 @@ export const READINESS: Item[] = [
   { id: "contact", area: "Content", label: "Contact email", status: configured(SITE.contactEmail), critical: false, note: SITE.contactEmail || "VITE_CONTACT_EMAIL not set — the contact page says channels open at launch." },
   { id: "instagram", area: "Content", label: "Instagram profile link", status: configured(SITE.instagram), critical: false, note: SITE.instagram || "VITE_INSTAGRAM_URL not set — Instagram links are hidden." },
   { id: "newsletter", area: "Content", label: "Newsletter list", status: configured(SITE.newsletterEndpoint), critical: false, note: SITE.newsletterEndpoint || "VITE_NEWSLETTER_ENDPOINT not set — sign-up form is replaced by a follow invitation." },
-  { id: "photos", area: "Content", label: "Missing product photography", status: "pending", critical: false, note: "Liguria Blouse in Celeste has no photo." },
 ];
 
 export const blocking = () => READINESS.filter((i) => i.critical && i.status !== "ready");

@@ -91,4 +91,4 @@ Voltar as duas variáveis para `prelaunch` e fazer novo deploy. Produtos, preço
 Lista viva em `src/config/launch.ts`, exibida no Creator → Launch. Resumo atual:
 
 - **Não construído:** backend de comércio com bloqueio no servidor, gateway de pagamento, webhooks de confirmação, pedidos em banco de dados, baixa de estoque, e-mails transacionais, login do administrador e Creator ligado às vendas reais.
-- **Aguardando você:** domínio e hospedagem, e-mail de contato, perfil do Instagram, lista de newsletter, revisão dos textos legais, confirmação da tabela de frete e foto da Liguria Blouse em Celeste.
+- **Aguardando você:** domínio e hospedagem, e-mail de contato, perfil do Instagram, lista de newsletter, revisão dos textos legais e confirmação da tabela de frete.
