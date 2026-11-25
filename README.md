@@ -1,32 +1,22 @@
-# React + TypeScript + Vite
+# wearportofino
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+PORTOFINO — site da maison de 100% linho (React + Vite + TypeScript + Tailwind).
 
-Currently, two official plugins are available:
+O site está em **modo pré-lançamento**: coleção, preços e marca públicos; compras desativadas.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Comandos
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+npm install
+npm run dev              # site público em desenvolvimento
+npm run dev:admin        # inclui o painel PORTOFINO Creator (#/admin)
+npm run build            # build público  → dist/
+npm run build:admin      # build privado  → dist-admin/ (nunca publicar)
+npm run test:prelaunch   # 80 testes: navegação, bloqueio de compras, integridade, segurança
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## Documentação
+
+- Estado comercial e lançamento oficial: [docs/OFFICIAL-LAUNCH-PROTOCOL.md](docs/OFFICIAL-LAUNCH-PROTOCOL.md)
+- Chave central: `src/config/store.ts` (`VITE_STORE_MODE=prelaunch | live`)
+- Checklist de lançamento: `src/config/launch.ts`
